@@ -1,0 +1,27 @@
+services:
+  - type: web
+    name: maythushar-youtube-api
+    env: node
+    buildCommand: npm install
+    startCommand: node server.js
+    healthCheckPath: /health
+    autoDeploy: true
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 3000
+      - key: CACHE_ENABLED
+        value: true
+      - key: RATE_LIMIT_WINDOW
+        value: 900000
+      - key: RATE_LIMIT_MAX_REQUESTS
+        value: 100
+    plan: pro
+    instanceType: professional
+    regions:
+      - oregon
+    disk:
+      name: cache-disk
+      mountPath: /opt/render/cache
+      sizeGB: 10
